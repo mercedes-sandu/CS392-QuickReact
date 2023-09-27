@@ -20,4 +20,5 @@ export const StyledCardBox = styled(Box)(({ theme }) => ({
     alignItems: "center",
     width: "100%",
     height: "175px",
+    alignItems: "flex-start",
 }));

@@ -1,16 +1,16 @@
+import CourseCard from './CourseCard';
+import { Grid } from '@mui/material';
+import { StyledGrid } from '../styles/StyledComponents';
+
 function CourseList({ courses }) {
     return (
-        <>
+        <StyledGrid container rowSpacing={3} columnSpacing={3}>
             {Object.values(courses).map(course => (
-                <div key={course.id}>
-                    {course.term} CS {course.number}
-                    <ul>
-                        <li>{course.title}</li>
-                        <li>{course.meets}</li>
-                    </ul>
-                </div>
+                <Grid item>
+                    <CourseCard key={course.id} course={course} />
+                </Grid>
             ))}
-        </>
+        </StyledGrid>
     );
 };
 

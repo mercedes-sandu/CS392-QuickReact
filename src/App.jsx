@@ -1,6 +1,7 @@
 import './App.css';
 import Banner from './components/Banner';
 import CourseList from './components/CourseList';
+import TermSelector from './components/TermSelector';
 import { useJsonQuery } from './utilities/fetch';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -16,7 +17,7 @@ const MainApp = () => {
   return (
     <div className="App">
       <Banner title={data.title} />
-      <CourseList courses={data.courses} />
+      <TermSelector courses={data.courses} />
     </div>
   );
 }

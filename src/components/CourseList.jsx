@@ -10,7 +10,7 @@ function CourseList({ courses }) {
     const [courseTimeConflicts, setCourseTimeConflicts] = useState([]);
 
     const handleCourseCardClick = (course) => {
-        if (course.isTimeConflict) return;
+        if (courseTimeConflicts[course.number]) return;
 
         if (selectedCourseList.includes(course)) {
             setSelectedCourseList((prevList) =>

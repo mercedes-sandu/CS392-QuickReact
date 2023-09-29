@@ -39,6 +39,9 @@ function IsTimeConflictIndividual(course1, course2) {
 
 export const IsTimeConflict = (course, selectedCoursesList) => {
     for (var i = 0; i < selectedCoursesList.length; i++) {
+        if (selectedCoursesList[i].number == course.number) {
+            continue;
+        }
         if (IsTimeConflictIndividual(course, selectedCoursesList[i])) {
             return true;
         }

@@ -43,7 +43,7 @@ export const StyledScheduleButton = styled(Button)(({ theme }) => ({
     "&:hover": {
         backgroundColor: "#29b6f6",
     },
-    position: "fixed",
+    position: "absolute",
     top: 0,
     right: 0,
     margin: "50px",

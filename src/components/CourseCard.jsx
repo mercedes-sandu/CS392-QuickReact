@@ -1,15 +1,15 @@
 import { CardActionArea, CardContent, Divider, Typography } from "@mui/material";
 import { StyledCard, StyledCardBox } from "../styles/StyledComponents";
 
-function CourseCard({ course, isSelected, onCourseCardClick }) {return (
+function CourseCard({ course, isSelected, isTimeConflict, onCourseCardClick }) {return (
     <StyledCard
       onClick={() => onCourseCardClick(course)}
       sx={{
-        backgroundColor: isSelected ? "#90caf9" : "#ffffff",
-        borderColor: isSelected ? "#42a5f5" : "#cccccc",
+        backgroundColor: isTimeConflict ? "#e57373" : isSelected ? "#90caf9" : "#ffffff",
+        borderColor: isTimeConflict ? "#d32f2f" : isSelected ? "#42a5f5" : "#cccccc",
       }}
     >
-      <CardActionArea>
+      <CardActionArea disabled={isTimeConflict}>
         <CardContent>
           <Typography 
             gutterBottom

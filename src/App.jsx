@@ -1,6 +1,5 @@
 import './App.css';
 import Banner from './components/Banner';
-import CourseList from './components/CourseList';
 import TermSelector from './components/TermSelector';
 import { useJsonQuery } from './utilities/fetch';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

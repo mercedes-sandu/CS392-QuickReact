@@ -64,7 +64,7 @@ const Selector = ({ courses }) => {
     );
 }
 
-const TermSelector = ({ courses }) => {
+function TermSelector({ courses }) {
     return (
         <>
             <Selector courses={courses} />

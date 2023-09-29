@@ -1,9 +1,9 @@
 import { CardActionArea, CardContent, Divider, Typography } from "@mui/material";
 import { StyledCard, StyledCardBox } from "../styles/StyledComponents";
 
-function CourseCard({ course, isSelected, onCourseCardClick, courseId }) {return (
+function CourseCard({ course, isSelected, onCourseCardClick }) {return (
     <StyledCard
-      onClick={() => onCourseCardClick(courseId)}
+      onClick={() => onCourseCardClick(course)}
       sx={{
         backgroundColor: isSelected ? "#90caf9" : "#ffffff",
         borderColor: isSelected ? "#42a5f5" : "#cccccc",

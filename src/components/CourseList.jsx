@@ -1,4 +1,5 @@
 import CourseCard from './CourseCard';
+import Schedule from './Schedule';
 import { Grid } from '@mui/material';
 import { StyledGrid } from '../styles/StyledComponents';
 import { useState } from 'react';
@@ -6,29 +7,31 @@ import { useState } from 'react';
 function CourseList({ courses }) {
     const [selectedCourseList, setSelectedCourseList] = useState([]);
 
-    const handleCourseCardClick = (courseId) => {
-        if (selectedCourseList.includes(courseId)) {
+    const handleCourseCardClick = (course) => {
+        if (selectedCourseList.includes(course)) {
             setSelectedCourseList((prevList) =>
-                prevList.filter((id) => id !== courseId)
+                prevList.filter((c) => c !== course)
         );
         } else {
-            setSelectedCourseList((prevList) => [...prevList, courseId]);
+            setSelectedCourseList((prevList) => [...prevList, course]);
         }
     };
 
     return (
-        <StyledGrid container rowSpacing={3} columnSpacing={3}>
-            {Object.entries(courses).map(([key, value]) => (
-                <Grid item key={key}>
-                    <CourseCard
-                        course={value}
-                        isSelected={selectedCourseList.includes(key)}
-                        onCourseCardClick={handleCourseCardClick}
-                        courseId={key}
-                    />
-                </Grid>
-            ))}
-        </StyledGrid>
+        <>
+            <Schedule selectedCourseList={selectedCourseList} />
+            <StyledGrid container rowSpacing={3} columnSpacing={3}>
+                {Object.entries(courses).map(([key, value]) => (
+                    <Grid item key={key}>
+                        <CourseCard
+                            course={value}
+                            isSelected={selectedCourseList.includes(value)}
+                            onCourseCardClick={handleCourseCardClick}
+                        />
+                    </Grid>
+                ))}
+            </StyledGrid>
+        </>
     );
 };
 

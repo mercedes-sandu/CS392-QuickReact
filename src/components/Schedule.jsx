@@ -1,6 +1,6 @@
 import { 
     StyledModal,
-    StyledModalBox,
+    StyledCoursesModalBox,
     StyledScheduleButton
 } from "../styles/StyledComponents";
 import { Grid, IconButton, Typography } from "@mui/material";
@@ -10,10 +10,10 @@ import CloseIcon from '@mui/icons-material/Close';
 const ScheduleModal = ({ open, onClose, selectedCourseList }) => {
     return (
         <StyledModal open={open} onClose={onClose}>
-            <StyledModalBox>
+            <StyledCoursesModalBox>
                 <Grid container>
                     <Typography variant="h5" component="h2">
-                    Courses Selected
+                        Courses Selected
                     </Typography>
                     <IconButton onClick={onClose} sx={{ ml: 'auto', mt: 0 }}>
                         <CloseIcon />
@@ -32,7 +32,7 @@ const ScheduleModal = ({ open, onClose, selectedCourseList }) => {
                         ))}
                     </>
                 )}
-            </StyledModalBox>
+            </StyledCoursesModalBox>
         </StyledModal>
     );
 };

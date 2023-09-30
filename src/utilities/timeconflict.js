@@ -20,7 +20,7 @@ function OnSameDay(days1, days2) {
     return false;
 }
 
-function TimesOverlap(startTime1, endTime1, startTime2, endTime2) {
+function TimesOverlap(startTime1, endTime1, startTime2, endTime2, course1, course2) {
     var startMinutes1 = ConvertTimeToMinutes(startTime1);
     var endMinutes1 = ConvertTimeToMinutes(endTime1);
     var startMinutes2 = ConvertTimeToMinutes(startTime2);
@@ -33,8 +33,8 @@ function IsTimeConflictIndividual(course1, course2) {
     var [days1, startTime1, endTime1] = ParseMeetingTime(course1.meets);
     var [days2, startTime2, endTime2] = ParseMeetingTime(course2.meets);
 
-    return OnSameDay(days1, days2) 
-        && TimesOverlap(startTime1, endTime1, startTime2, endTime2);
+    return OnSameDay(days1, days2)
+        && TimesOverlap(startTime1, endTime1, startTime2, endTime2, course1, course2);
 }
 
 export const IsTimeConflict = (course, selectedCoursesList) => {
@@ -47,4 +47,24 @@ export const IsTimeConflict = (course, selectedCoursesList) => {
         }
     }
     return false;
+}
+
+export const GetStartTime = (course) => {
+    var [days, startTime, endTime] = ParseMeetingTime(course.meets);
+    var startTimeDate = new Date();
+    var timeArr = startTime.split(':');
+    startTimeDate.setHours(timeArr[0]);
+    startTimeDate.setMinutes(timeArr[1]);
+    startTimeDate.setSeconds(0);
+    return startTimeDate;
+}
+
+export const GetEndTime = (course) => {
+    var [days, startTime, endTime] = ParseMeetingTime(course.meets);
+    var endTimeDate = new Date();
+    var timeArr = endTime.split(':');
+    endTimeDate.setHours(timeArr[0]);
+    endTimeDate.setMinutes(timeArr[1]);
+    endTimeDate.setSeconds(0);
+    return endTimeDate;
 }

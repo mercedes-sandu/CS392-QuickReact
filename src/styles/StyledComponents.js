@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, Grid, Modal, styled } from "@mui/material";
+import { Box, Button, Card, CardContent, Grid, IconButton, Modal, styled } from "@mui/material";
 
 export const StyledGrid = styled(Grid)(({ theme }) => ({
     direction: "row",
@@ -82,4 +82,19 @@ export const StyledEditFormModalBox = styled(Box)(({ theme }) => ({
     borderRadius: "8px",
     border: "2px solid #cccccc",
     boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+}));
+
+export const StyledDaysBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "space-evenly",
+    width: "99%",
+    mb: 1,
+    borderWidth: "2px",
+    borderStyle: "solid",
+    borderRadius: "8px",
+}));
+
+export const StyledDayIconButton = styled(IconButton)(({ theme }) => ({
+    width: "40px",
+    height: "40px",
 }));

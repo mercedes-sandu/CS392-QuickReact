@@ -6,17 +6,19 @@ import {
 } from "../styles/StyledComponents";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { TimeField } from "@mui/x-date-pickers";
-import { GetEndTime, GetStartTime } from "../utilities/timeconflict";
+import { GetDays, GetEndTime, GetStartTime } from "../utilities/timeconflict";
 import { useEffect, useState } from "react";
 import { TimeIncludesDay } from "../utilities/timeconflict";
+import { useDbUpdate } from "../utilities/firebase";
 
-const onSubmit = () => {
-  // this is supposed to do nothing for now lol
-};
-
-function EditForm({ open, onClose, course }) {
+function EditForm({ open, onClose, course, courseKey }) {
   const startTime = GetStartTime(course);
   const endTime = GetEndTime(course);
+  const [update] = useDbUpdate(`/courses/${courseKey}`);
+  const [editedTitle, setEditedTitle] = useState(course.title);
+  const [editedDays, setEditedDays] = useState(GetDays(course));
+  const [editedStartTime, setEditedStartTime] = useState(startTime);
+  const [editedEndTime, setEditedEndTime] = useState(endTime);
   const [titleValid, setTitleValid] = useState(true);
   const [daysValid, setDaysValid] = useState(true);
   const [startTimeValid, setStartTimeValid] = useState(true);
@@ -32,18 +34,27 @@ function EditForm({ open, onClose, course }) {
   const onTitleChange = (event) => {
     const title = event.target.value;
     setTitleValid(title.length >= 2);
+    setEditedTitle(title);
   };
 
-  const onStartTimeChange = (event) => {
-    const time = event.target.value;
-    setStartTimeValid(new Date(time) !== "Invalid Date") &&
-      !isNaN(new Date(time));
+  const onStartTimeChange = (time) => {
+    setEditedStartTime(new Date(time));
+    setStartTimeValid(
+      new Date(time) !== "Invalid Date" &&
+        !isNaN(new Date(time)) &&
+        new Date(time) < new Date(editedEndTime)
+    );
+    setEndTimeValid(new Date(time) < new Date(editedEndTime));
   };
 
-  const onEndTimeChange = (event) => {
-    const time = event.target.value;
-    setEndTimeValid(new Date(time) !== "Invalid Date") &&
-      !isNaN(new Date(time));
+  const onEndTimeChange = (time) => {
+    setEditedEndTime(new Date(time));
+    setEndTimeValid(
+      new Date(time) !== "Invalid Date" &&
+        !isNaN(new Date(time)) &&
+        new Date(time) > new Date(editedStartTime)
+    );
+    setStartTimeValid(new Date(time) > new Date(editedStartTime));
   };
 
   const onDayClick = (day) => {
@@ -52,8 +63,40 @@ function EditForm({ open, onClose, course }) {
     });
   };
 
+  const onSubmit = () => {
+    if (titleValid && daysValid && startTimeValid && endTimeValid) {
+      var editedStartTimeFormatted =
+        (editedStartTime.getHours() < 10 ? "0" : "") +
+        editedStartTime.getHours() +
+        ":" +
+        (editedStartTime.getMinutes() < 10 ? "0" : "") +
+        editedStartTime.getMinutes();
+      var editedEndTimeFormatted =
+        (editedEndTime.getHours() < 10 ? "0" : "") +
+        editedEndTime.getHours() +
+        ":" +
+        (editedEndTime.getMinutes() < 10 ? "0" : "") +
+        editedEndTime.getMinutes();
+      update({
+        title: editedTitle,
+        meets:
+          editedDays +
+          " " +
+          editedStartTimeFormatted +
+          "-" +
+          editedEndTimeFormatted,
+      });
+      onClose();
+    }
+  };
+
   useEffect(() => {
     setDaysValid(Object.values(days).reduce((acc, day) => acc || day, false));
+    setEditedDays(
+      Object.keys(days)
+        .filter((day) => days[day])
+        .join("")
+    );
   }, [days]);
 
   return (
@@ -171,16 +214,22 @@ function EditForm({ open, onClose, course }) {
             label="Start Time"
             variant="filled"
             format="HH:mm"
-            defaultValue={startTime}
+            value={editedStartTime}
+            onChange={(time) => onStartTimeChange(time)}
+            defaultValue={startTime.toDate()}
             error={!startTimeValid}
-            helperText={startTimeValid ? "" : "Please select a valid start time."}
+            helperText={
+              startTimeValid ? "" : "Please select a valid start time."
+            }
           />
           <TimeField
             id="class-end-time"
             label="End Time"
             variant="filled"
             format="HH:mm"
-            defaultValue={endTime}
+            value={editedEndTime}
+            onChange={(time) => onEndTimeChange(time)}
+            defaultValue={endTime.toDate()}
             error={!endTimeValid}
             helperText={endTimeValid ? "" : "Please select a valid end time."}
           />

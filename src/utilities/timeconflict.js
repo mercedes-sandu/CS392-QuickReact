@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 function ParseMeetingTime(meetingTime) {
     const [days, time] = meetingTime.split(' ')
     const [startTime, endTime] = time.split('-')
@@ -49,6 +51,11 @@ export const IsTimeConflict = (course, selectedCoursesList) => {
     return false;
 }
 
+export const GetDays = (course) => {
+    var [days, startTime, endTime] = ParseMeetingTime(course.meets);
+    return days;
+}
+
 export const GetStartTime = (course) => {
     var [days, startTime, endTime] = ParseMeetingTime(course.meets);
     var startTimeDate = new Date();
@@ -56,7 +63,7 @@ export const GetStartTime = (course) => {
     startTimeDate.setHours(timeArr[0]);
     startTimeDate.setMinutes(timeArr[1]);
     startTimeDate.setSeconds(0);
-    return startTimeDate;
+    return dayjs(startTimeDate);
 }
 
 export const GetEndTime = (course) => {
@@ -66,7 +73,7 @@ export const GetEndTime = (course) => {
     endTimeDate.setHours(timeArr[0]);
     endTimeDate.setMinutes(timeArr[1]);
     endTimeDate.setSeconds(0);
-    return endTimeDate;
+    return dayjs(endTimeDate);
 }
 
 export const TimeIncludesDay = (course, day) => {

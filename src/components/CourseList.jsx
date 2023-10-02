@@ -39,6 +39,7 @@ function CourseList({ courses }) {
           <Grid item key={key}>
             <CourseCard
               course={value}
+              courseKey={key}
               isSelected={selectedCourseList.includes(value)}
               isTimeConflict={
                 courseTimeConflicts[value.term + " " + value.number]

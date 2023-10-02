@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import EditForm from "./EditForm";
 
-function CourseCard({ course, isSelected, isTimeConflict, onCourseCardClick }) {
+function CourseCard({ course, courseKey, isSelected, isTimeConflict, onCourseCardClick }) {
   const [showModal, setShowModal] = useState(false);
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
@@ -77,7 +77,12 @@ function CourseCard({ course, isSelected, isTimeConflict, onCourseCardClick }) {
         </StyledCardContent>
       </StyledCard>
       {showModal && (
-        <EditForm open={showModal} onClose={handleClose} course={course} />
+        <EditForm
+          open={showModal}
+          onClose={handleClose}
+          course={course}
+          courseKey={courseKey}
+        />
       )}
     </>
   );

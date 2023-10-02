@@ -98,3 +98,8 @@ export const StyledDayIconButton = styled(IconButton)(({ theme }) => ({
     width: "40px",
     height: "40px",
 }));
+
+export const StyledH1 = styled("h1")(({ theme }) => ({
+    padding: "20px 40px",
+    fontSize: "2em",
+}));

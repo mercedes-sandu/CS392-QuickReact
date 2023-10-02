@@ -5,7 +5,7 @@ import { StyledGrid } from "../styles/StyledComponents";
 import { useEffect, useState } from "react";
 import { IsTimeConflict } from "../utilities/timeconflict";
 
-function CourseList({ courses }) {
+function CourseList({ courses, user }) {
   const [selectedCourseList, setSelectedCourseList] = useState([]);
   const [courseTimeConflicts, setCourseTimeConflicts] = useState([]);
 
@@ -45,6 +45,7 @@ function CourseList({ courses }) {
                 courseTimeConflicts[value.term + " " + value.number]
               }
               onCourseCardClick={handleCourseCardClick}
+              user={user}
             />
           </Grid>
         ))}

@@ -24,29 +24,14 @@ export const StyledCardContent = styled(CardContent)(({ theme }) => ({
     height: "100%",
 }));
 
-export const StyledTermSelectorBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "100%",
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "8px",
-    border: "2px solid #cccccc",
-    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
-}));
-
 export const StyledScheduleButton = styled(Button)(({ theme }) => ({
     backgroundColor: "#0288d1",
     color: "white",
     "&:hover": {
         backgroundColor: "#29b6f6",
     },
-    position: "absolute",
-    top: 0,
-    right: 0,
+    width: "50%",
+    height: "100%",
     margin: "50px",
 }));
 
@@ -102,4 +87,26 @@ export const StyledDayIconButton = styled(IconButton)(({ theme }) => ({
 export const StyledH1 = styled("h1")(({ theme }) => ({
     padding: "20px 40px",
     fontSize: "2em",
+}));
+
+export const StyledLoginContainer = styled(Box)(({ theme }) => ({
+    width: "100%",
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+}));
+
+export const StyledLoginBox = styled(Box)(({ theme }) => ({
+    width: "40%",
+    height: "auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "8px",
+    border: "2px solid #cccccc",
+    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
 }));

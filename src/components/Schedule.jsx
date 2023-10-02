@@ -3,7 +3,7 @@ import {
     StyledCoursesModalBox,
     StyledScheduleButton
 } from "../styles/StyledComponents";
-import { Grid, IconButton, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -44,9 +44,11 @@ function Schedule ({ selectedCourseList }) {
 
     return (
         <>
-            <StyledScheduleButton onClick={handleOpen}>
-                Schedule
-            </StyledScheduleButton>
+            <Box sx={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+                <StyledScheduleButton onClick={handleOpen}>
+                    Schedule
+                </StyledScheduleButton>
+            </Box>
             {showModal && 
                 <ScheduleModal
                     open={showModal}

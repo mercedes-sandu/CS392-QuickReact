@@ -4,7 +4,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import EditForm from "./EditForm";
 
-function CourseCard({ course, courseKey, isSelected, isTimeConflict, onCourseCardClick }) {
+function CourseCard({
+  course,
+  courseKey,
+  isSelected,
+  isTimeConflict,
+  onCourseCardClick,
+  user,
+}) {
   const [showModal, setShowModal] = useState(false);
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
@@ -43,22 +50,24 @@ function CourseCard({ course, courseKey, isSelected, isTimeConflict, onCourseCar
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                <IconButton
-                  sx={{
-                    ml: "auto",
-                    mt: 0,
-                    width: "40px",
-                    height: "40px",
-                  }}
-                  onMouseDown={(event) => event.stopPropagation()}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    handleOpen();
-                  }}
-                >
-                  <EditIcon />
-                </IconButton>
+                {user && (
+                  <IconButton
+                    sx={{
+                      ml: "auto",
+                      mt: 0,
+                      width: "40px",
+                      height: "40px",
+                    }}
+                    onMouseDown={(event) => event.stopPropagation()}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      event.preventDefault();
+                      handleOpen();
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                )}
               </Grid>
             </Grid>
             <Typography variant="h6">{course.title}</Typography>

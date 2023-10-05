@@ -1,6 +1,6 @@
 import CourseCard from "./CourseCard";
 import Schedule from "./Schedule";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { StyledGrid } from "../styles/StyledComponents";
 import { useEffect, useState } from "react";
 import { IsTimeConflict } from "../utilities/timeconflict";
@@ -33,7 +33,11 @@ function CourseList({ courses, profile }) {
 
   return (
     <>
-      <Schedule selectedCourseList={selectedCourseList} />
+      {profile.user ? (
+        <Schedule selectedCourseList={selectedCourseList} />
+      ) : (
+        <Box sx={{ height: "30px" }}></Box>
+      )}
       <StyledGrid container rowSpacing={3} columnSpacing={3}>
         {Object.entries(courses).map(([key, value]) => (
           <Grid item key={key}>

@@ -1,7 +1,8 @@
-import { Avatar, Button, Grid, Typography } from "@mui/material";
-import { signOut } from "../utilities/firebase";
+import { Avatar, Grid, Typography } from "@mui/material";
+import AuthenticationButton from "./AuthenticationButton";
 
 function Banner({ title, profile }) {
+  // console.log(profile.user);
   return (
     <Grid container>
       <Grid item xs={10}>
@@ -18,7 +19,7 @@ function Banner({ title, profile }) {
           alignItems: "center",
         }}
       >
-        <Avatar src={profile.user.photoURL} />
+        {profile.user ? <Avatar src={profile.user.photoURL} /> : <></>}
       </Grid>
       <Grid
         item
@@ -29,9 +30,7 @@ function Banner({ title, profile }) {
           alignItems: "center",
         }}
       >
-        <Button variant="contained" onClick={signOut}>
-          Log Out
-        </Button>
+        <AuthenticationButton />
       </Grid>
     </Grid>
   );

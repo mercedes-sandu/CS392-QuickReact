@@ -17,7 +17,7 @@ const terms = {
   spring: "Spring",
 };
 
-const Selector = ({ courses, user }) => {
+const Selector = ({ courses, profile }) => {
   const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
 
   return (
@@ -65,16 +65,16 @@ const Selector = ({ courses, user }) => {
                 )
               )
         }
-        user={user}
+        profile={profile}
       />
     </>
   );
 };
 
-function TermSelector({ courses, user }) {
+function TermSelector({ courses, profile }) {
   return (
     <>
-      <Selector courses={courses} user={user} />
+      <Selector courses={courses} profile={profile} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { Avatar, Button, Grid, Typography } from "@mui/material";
 import { signOut } from "../utilities/firebase";
 
-function Banner({ title, user }) {
+function Banner({ title, profile }) {
   return (
     <Grid container>
       <Grid item xs={10}>
@@ -18,7 +18,7 @@ function Banner({ title, user }) {
           alignItems: "center",
         }}
       >
-        <Avatar src={user.photoURL} />
+        <Avatar src={profile.user.photoURL} />
       </Grid>
       <Grid
         item

@@ -11,10 +11,10 @@ import { useEffect, useState } from "react";
 import { TimeIncludesDay } from "../utilities/timeconflict";
 import { useDbUpdate } from "../utilities/firebase";
 
-function EditForm({ open, onClose, course, courseKey }) {
+function EditForm({ open, onClose, course, courseKey, uid }) {
   const startTime = GetStartTime(course);
   const endTime = GetEndTime(course);
-  const [update] = useDbUpdate(`/courses/${courseKey}`);
+  const [update] = useDbUpdate(`/courses/${uid}/${courseKey}`);
   const [editedTitle, setEditedTitle] = useState(course.title);
   const [editedDays, setEditedDays] = useState(GetDays(course));
   const [editedStartTime, setEditedStartTime] = useState(startTime);

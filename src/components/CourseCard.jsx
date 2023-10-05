@@ -10,7 +10,7 @@ function CourseCard({
   isSelected,
   isTimeConflict,
   onCourseCardClick,
-  user,
+  profile,
 }) {
   const [showModal, setShowModal] = useState(false);
   const handleOpen = () => setShowModal(true);
@@ -50,7 +50,7 @@ function CourseCard({
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                {user && (
+                {profile.isAdmin && (
                   <IconButton
                     sx={{
                       ml: "auto",
@@ -91,6 +91,7 @@ function CourseCard({
           onClose={handleClose}
           course={course}
           courseKey={courseKey}
+          uid={profile.user.uid}
         />
       )}
     </>

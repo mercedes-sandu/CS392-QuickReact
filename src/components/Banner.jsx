@@ -12,24 +12,18 @@ function Banner({ title, profile }) {
       </Grid>
       <Grid
         item
-        xs={1}
+        xs={2}
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           alignItems: "center",
         }}
       >
-        {profile.user ? <Avatar src={profile.user.photoURL} /> : <></>}
-      </Grid>
-      <Grid
-        item
-        xs={1}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+        {profile.user ? (
+          <Avatar src={profile.user.photoURL} sx={{ mr: 3 }} />
+        ) : (
+          <></>
+        )}
         <AuthenticationButton />
       </Grid>
     </Grid>

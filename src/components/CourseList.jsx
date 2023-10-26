@@ -10,7 +10,7 @@ function CourseList({ courses, profile }) {
   const [courseTimeConflicts, setCourseTimeConflicts] = useState([]);
 
   const handleCourseCardClick = (course) => {
-    if (courseTimeConflicts[course.number]) return;
+    if (courseTimeConflicts[course.number] || !profile.user) return;
 
     if (selectedCourseList.includes(course)) {
       setSelectedCourseList((prevList) => prevList.filter((c) => c !== course));

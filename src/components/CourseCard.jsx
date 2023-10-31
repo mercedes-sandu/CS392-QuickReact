@@ -40,6 +40,7 @@ function CourseCard({
               : "#f5f5f5",
           },
         }}
+        data-cy="course"
       >
         <StyledCardContent>
           <div>

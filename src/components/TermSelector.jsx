@@ -42,6 +42,7 @@ function TermSelector({ setTerm }) {
                 control={<Radio />}
                 label={value}
                 onChange={() => setTerm(value)}
+                data-cy={value}
               />
             ))}
           </RadioGroup>

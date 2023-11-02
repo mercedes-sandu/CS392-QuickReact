@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref, update } from "firebase/database";
+import { connectDatabaseEmulator, getDatabase, onValue, ref, update } from "firebase/database";
 import { useCallback, useEffect, useState } from "react";
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { connectAuthEmulator, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithCredential, signInWithPopup, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBOmRgz_JXpfnzRiOyJyWMICm_Ap7rGWXQ",
@@ -16,6 +16,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
+
+if (!globalThis.EMULATION && import.meta.env.MODE === 'development') {
+    connectAuthEmulator(auth, "http://127.0.0.1:9099");
+    connectDatabaseEmulator(database, "127.0.0.1", 9000);
+
+    signInWithCredential(auth, GoogleAuthProvider.credential('{"sub": "qEvli4msW0eDz5mSVO6j3W7i8w1k", "email": "tester@gmail.com", "displayName": "Test User", "email_verified": true}'));
+
+    globalThis.EMULATION = true;
+}
 
 export const useDbData = (path) => {
     const [data, setData] = useState(null);
@@ -49,10 +59,10 @@ export const useDbUpdate = (path) => {
 };
 
 export const signInWithGoogle = () => {
-    signInWithPopup(getAuth(app), new GoogleAuthProvider());
+    signInWithPopup(auth, new GoogleAuthProvider());
 };
 
-const firebaseSignOut = () => signOut(getAuth(app));
+const firebaseSignOut = () => signOut(auth);
 
 export { firebaseSignOut as signOut };
 
@@ -60,7 +70,7 @@ export const useAuthState = () => {
     const [user, setUser] = useState();
 
     useEffect(() => (
-        onAuthStateChanged(getAuth(app), setUser)
+        onAuthStateChanged(auth, setUser)
     ), []);
 
     return [user];
